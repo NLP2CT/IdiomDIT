@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <title>IdiomDIT — Idioms Understood, Yet Translated Literally</title>
+  <meta name="description" content="Why do multilingual LLMs translate idioms literally even when they understand them? IdiomDIT diagnoses detection, interpretation, and translation across six language pairs and five models.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IdiomDIT — Idioms Understood, Yet Translated Literally">
+  <meta property="og:description" content="Diagnosing literal translation bias in multilingual LLMs. Six language pairs. Five models. A closer look at the gap between understanding and generation.">
+  <meta property="og:image" content="https://nlp2ct.github.io/IdiomDIT/assets/social-preview.png">
+  <meta property="og:url" content="https://nlp2ct.github.io/IdiomDIT/">
+  <link rel="canonical" href="https://nlp2ct.github.io/IdiomDIT/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="Idioms Understood, Yet Translated Literally: Diagnosing Literal Translation Bias in Multilingual LLMs">
+  <meta name="citation_author" content="Yanming Sun">
+  <meta name="citation_author" content="Runzhe Zhan">
+  <meta name="citation_author" content="Yu Chao">
+  <meta name="citation_author" content="Jingkun Ma">
+  <meta name="citation_author" content="Shuo Wang">
+  <meta name="citation_author" content="Lidia S. Chao">
+  <meta name="citation_author" content="Derek F. Wong">
+  <meta name="citation_pdf_url" content="https://nlp2ct.github.io/IdiomDIT/assets/IdiomDIT.pdf">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="IdiomDIT home"><span class="brand-symbol" aria-hidden="true">i<span>→</span></span>Idiom<span>DIT</span></a>
+      <div class="nav-links"><a href="#overview">Overview</a><a href="#framework">Framework</a><a href="#results">Results</a><a href="#citation">Citation <span aria-hidden="true">↗</span></a></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="paper-title">
+      <div class="eyebrow"><span class="small-mark" aria-hidden="true"></span> LANGUAGE, MEANING &amp; MACHINE TRANSLATION</div>
+      <h1 id="paper-title">Idioms Understood,<br><span>Yet Translated Literally.</span></h1>
+      <p class="paper-subtitle">Diagnosing Literal Translation Bias in Multilingual LLMs</p>
+      <div class="authors" aria-label="Authors">
+        <span>Yanming Sun<sup>1,*</sup></span><span>Runzhe Zhan<sup>1</sup></span><span>Yu Chao<sup>2</sup></span><span>Jingkun Ma<sup>1</sup></span><span>Shuo Wang<sup>2,†</sup></span><span>Lidia S. Chao<sup>1</sup></span><span>Derek F. Wong<sup>1,†</sup></span>
+      </div>
+      <p class="affiliations"><span><sup>1</sup> NLP2CT Lab · University of Macau</span><span><sup>2</sup> Tsinghua University</span></p>
+      <p class="author-notes">* Work done during an internship at Tsinghua University. <span>† Corresponding authors.</span></p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="assets/IdiomDIT.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H5v18h14V8zm0 0v5h5M8 12h8M8 16h6"/></svg>Read the paper <span aria-hidden="true">↗</span></a>
+        <a class="button button-secondary" href="https://github.com/NLP2CT/IdiomDIT" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-5 3 2-16"/></svg>Code &amp; protocol</a>
+        <a class="button button-text" href="#citation"><span aria-hidden="true">{ }</span> BibTeX</a>
+      </div>
+
+      <div class="teaser">
+        <div class="teaser-header"><span class="section-kicker">THE UNDERSTANDING–GENERATION GAP</span><span class="figure-tag">An example from Figure 1</span></div>
+        <div class="translation-story">
+          <div class="source-example">
+            <div class="micro-label">01 <span>SOURCE · FRENCH</span></div>
+            <p class="example-sentence" lang="fr">Il a <mark>la banane</mark><br>aujourd’hui.</p>
+            <div class="meaning-note"><span class="status-dot" aria-hidden="true"></span><span>Meaning understood:<br><strong>“to have a big smile”</strong></span></div>
+          </div>
+          <div class="story-arrow" aria-hidden="true">→</div>
+          <div class="translation-example literal">
+            <div class="micro-label">02 <span>LITERAL TRANSLATION</span></div>
+            <p class="example-sentence">He has the<br><span class="wrong-word">banana</span> today.</p>
+            <span class="outcome-label"><span aria-hidden="true">×</span> Words preserved. Meaning lost.</span>
+          </div>
+          <div class="translation-example faithful">
+            <div class="micro-label">03 <span>MEANING-PRESERVING</span></div>
+            <p class="example-sentence">He is <span>all smiles</span><br>today.</p>
+            <span class="outcome-label"><span aria-hidden="true">✓</span> The intended meaning comes through.</span>
+          </div>
+        </div>
+        <div class="teaser-bottom"><span class="diagnosis-pill">Detection <b>✓</b></span><span class="diagnosis-pill">Interpretation <b>✓</b></span><span class="teaser-conclusion">…yet literal translation persists. <strong>This is LTB.</strong></span></div>
+      </div>
+      <div class="scope-strip" aria-label="Study scope"><div><strong>6</strong><span>translation directions</span></div><div><strong>5</strong><span>language models</span></div><div><strong>4B–70B</strong><span>model parameters</span></div><div><strong>D · I · T</strong><span>one diagnostic framework</span></div></div>
+    </section>
+
+    <section class="section container overview" id="overview" aria-labelledby="overview-title">
+      <div class="section-heading"><span class="section-index">01 / OVERVIEW</span><h2 id="overview-title">Knowing the meaning<br>is only half the story.</h2></div>
+      <div class="overview-body"><p class="lead">When an LLM translates an idiom word for word, is it missing the knowledge—or failing to use what it knows?</p><p>IdiomDIT separates these possibilities by evaluating <strong>Detection</strong>, <strong>Interpretation</strong>, and <strong>Translation</strong> together. It reveals a persistent “know-but-error” pattern: models recognize an idiom and explain its meaning, yet still translate it literally. We call this <strong>Literal Translation Bias (LTB)</strong>.</p><p>Across six language pairs and five models, the dominant failure mode depends on the translation direction. Prompting helps, but does not eliminate the errors. Probing and ablation offer a further lesson: apparent hidden-state evidence needs controls for idiom identity and random perturbations.</p>
+      <details class="abstract-details"><summary>Read the full abstract <span aria-hidden="true">+</span></summary><div class="abstract-text"><p>Large language models persistently produce literal translations of idiomatic expressions, but the source of this failure remains unclear. We introduce IdiomDIT, a diagnostic framework that jointly evaluates idiom Detection, idiom Interpretation, and idiomatic Translation, attributing each error to a specific source. Across six language pairs and five models spanning 4B to 70B, IdiomDIT shows that literal translation error (LTE) can persist even after successful detection and interpretation, a know-but-error pattern we term Literal Translation Bias (LTB). This pattern is direction-specific: LTB dominates some directions, while others show greater knowledge deficits, likely reflecting lower idiom exposure in pretraining. We then use linear probing to test whether LTB is already reflected in the model’s pre-generation hidden state, recovering per-language literal translation directions with high accuracy, and ablating this direction reduces LTE. However, once we ensure no idiom’s data leaks across training and test, and subtract out each idiom’s mean hidden state before probing, accuracy collapses, confirming the probe was largely detecting which idiom it is looking at rather than a genuine bias signal. A matched random direction also reduces LTE just as much as the identified one. We release these controls as a reusable protocol for testing whether such hidden-state attribution claims in machine translation are genuine or confounded.</p></div></details></div>
+    </section>
+
+    <section class="section framework-section" id="framework" aria-labelledby="framework-title"><div class="container">
+      <div class="section-heading centered"><span class="section-index">02 / THE FRAMEWORK</span><h2 id="framework-title">Three questions. A clearer diagnosis.</h2><p>One translation score cannot tell us where the failure begins.</p></div>
+      <div class="pipeline">
+        <article class="pipeline-step"><div class="step-top"><span class="step-letter">D</span><span class="step-number">STEP 01</span></div><h3>Detection</h3><p>Does the model recognize<br>the expression as an idiom?</p><div class="step-detail">Identify the idiomatic span</div></article>
+        <article class="pipeline-step"><div class="step-top"><span class="step-letter">I</span><span class="step-number">STEP 02</span></div><h3>Interpretation</h3><p>Can it explain the intended<br>meaning in this context?</p><div class="step-detail">Check contextual knowledge</div></article>
+        <article class="pipeline-step"><div class="step-top"><span class="step-letter">T</span><span class="step-number">STEP 03</span></div><h3>Translation</h3><p>Does its translation actually<br>convey that meaning?</p><div class="step-detail">Evaluate the generated output</div></article>
+      </div>
+      <div class="diagnostic-layout"><div class="diagnostic-intro"><span class="section-kicker">LOCATING THE FAILURE</span><h3>Understanding<br>meets generation.</h3><p>Cross detection with interpretation, then check the translation. Literal errors in the full-knowledge group isolate LTB.</p><a class="inline-link" href="assets/IdiomDIT.pdf#page=4" target="_blank" rel="noopener">Explore the methodology <span aria-hidden="true">↗</span></a></div>
+        <div class="diagnostic-matrix" aria-label="Detection and interpretation diagnostic matrix">
+          <div class="matrix-cell full"><span class="matrix-code">D = 1 · I = 1</span><h4>Full knowledge</h4><p>Recognized and understood.</p><span class="ltb-note">Literal error here → LTB</span></div>
+          <div class="matrix-cell"><span class="matrix-code">D = 1 · I = 0</span><h4>Partial knowledge</h4><p>Recognized, meaning unknown.</p></div>
+          <div class="matrix-cell"><span class="matrix-code">D = 0 · I = 1</span><h4>Latent knowledge</h4><p>Meaning known, not detected.</p></div>
+          <div class="matrix-cell"><span class="matrix-code">D = 0 · I = 0</span><h4>No knowledge</h4><p>Neither detected nor understood.</p></div>
+        </div>
+      </div>
+      <p class="metric-note"><strong>What counts as a literal translation error?</strong> Both literal preservation <em>and</em> loss of idiomatic meaning. A literal rendering that conveys the meaning is not an LTE.</p>
+      <details class="paper-figure-details"><summary>View the original framework figure <span aria-hidden="true">+</span></summary><figure><button class="figure-zoom" data-figure="assets/framework.png" data-caption="Figure 1. Overview of the IdiomDIT diagnostic framework." aria-label="Enlarge Figure 1: IdiomDIT framework"><img src="assets/framework.png" width="1374" height="603" loading="lazy" alt="Figure 1 from the paper: a French idiom translated literally versus idiomatically, alongside the Detection, Interpretation, Translation cascade and diagnostic matrix."></button><figcaption>Figure 1. The IdiomDIT diagnostic framework. Select the figure to enlarge.</figcaption></figure></details>
+    </div></section>
+
+    <section class="section container" id="results" aria-labelledby="results-title">
+      <div class="section-heading"><span class="section-index">03 / BEHAVIORAL FINDINGS</span><h2 id="results-title">Same error. Different origins.</h2><p>Literal translation bias and knowledge deficits contribute differently across directions.</p></div>
+      <div class="findings-row"><article><span class="finding-number">01</span><h3>The direction matters.</h3><p>En→Fa, Fr→En, and Ko→En are dominated by LTB. Fa→En, Fi→En, and Ja→En show a mix of LTB and knowledge deficits.</p></article><article><span class="finding-number">02</span><h3>Target the actual error.</h3><p>Instructions to avoid literal translation reduce LTE more than generic meaning-preservation instructions in all six directions for Qwen3.5-9B.</p></article><article><span class="finding-number">03</span><h3>Prompting has limits.</h3><p>Even the strongest tested prompt leaves residual LTE, including 13.0% for French→English and 29.4% for Finnish→English.</p></article></div>
+      <figure class="sankey-figure"><div class="figure-heading"><span>Tracing detection → interpretation → translation</span><span class="figure-tag">Qwen3.5-9B · Basic prompt</span></div><button class="figure-zoom" data-figure="assets/diagnosis.png" data-caption="Figure 2. IdiomDIT outcomes across all six language pairs, using Qwen3.5-9B with the Basic prompt." aria-label="Enlarge Figure 2: outcomes across six language pairs"><img src="assets/diagnosis.png" width="1374" height="609" loading="lazy" alt="Six Sankey diagrams showing Detection, Interpretation, and Translation outcomes. Basic-prompt LTE rates are 9.0% for En to Fa, 22.5% for Fr to En, 4.5% for Ko to En, 20.0% for Fa to En, 32.9% for Fi to En, and 14.4% for Ja to En."></button><figcaption>Figure 2 from the paper. Green: correct translation. Orange: non-LTE but wrong. Red: literal translation error. Select to enlarge.</figcaption></figure>
+
+      <div class="experiment" aria-labelledby="experiment-title">
+        <div class="experiment-top"><div><span class="section-kicker">EXPLORE THE RESULTS</span><h3 id="experiment-title">Can a better prompt help?</h3><p>Compare four prompts across six translation directions.</p></div><span class="model-label">Qwen3.5-9B</span></div>
+        <div class="direction-buttons" role="group" aria-label="Choose a translation direction"><button data-direction="en-fa" aria-pressed="false">En → Fa</button><button data-direction="fr-en" aria-pressed="true">Fr → En</button><button data-direction="ko-en" aria-pressed="false">Ko → En</button><button data-direction="fa-en" aria-pressed="false">Fa → En</button><button data-direction="fi-en" aria-pressed="false">Fi → En</button><button data-direction="ja-en" aria-pressed="false">Ja → En</button></div>
+        <div class="chart-heading"><h4 id="direction-title">French → English <span>138 instances</span></h4><span>LTE rate (%) · lower is better</span></div>
+        <div class="chart" role="img" aria-label="French to English LTE rates: Basic 22.5%, Meaning-First 18.8%, Anti-Literal 13.0%, Super 13.8%." id="prompt-chart">
+          <div class="bar-row"><span class="bar-label">Basic</span><div class="bar-track"><div class="bar-fill basic" data-bar="basic" style="width:64.2857%"></div></div><strong data-value="basic">22.5%</strong></div>
+          <div class="bar-row"><span class="bar-label">Meaning-First</span><div class="bar-track"><div class="bar-fill meaning" data-bar="meaning" style="width:53.7143%"></div></div><strong data-value="meaning">18.8%</strong></div>
+          <div class="bar-row"><span class="bar-label">Anti-Literal</span><div class="bar-track"><div class="bar-fill anti" data-bar="anti" style="width:37.1429%"></div></div><strong data-value="anti">13.0%</strong></div>
+          <div class="bar-row"><span class="bar-label">Super</span><div class="bar-track"><div class="bar-fill super" data-bar="super" style="width:39.4286%"></div></div><strong data-value="super">13.8%</strong></div>
+          <div class="chart-axis" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span><span>35%</span></div>
+        </div>
+        <div class="chart-insight" aria-live="polite" aria-atomic="true"><span class="insight-icon" aria-hidden="true">↘</span><p id="chart-insight"><strong>9.5 percentage points lower</strong> with Anti-Literal than Basic. A 13.0% literal error rate still remains.</p></div>
+        <div class="chart-notes"><p>Source: Figure 3. Values are reported LTE rates, rounded to one decimal place. Super combines meaning-preservation and anti-literal instructions. These are recorded results, not a live model demo.</p><details><summary>Prompt wording &amp; all reported values</summary><div class="prompt-wording"><p>Every prompt begins: “Translate the following sentences from [SRC] to [TGT]”.</p><ul><li><strong>Basic:</strong> no additional instruction.</li><li><strong>Meaning-First:</strong> “ensuring that the translation conveys the intended meaning accurately.”</li><li><strong>Anti-Literal:</strong> “avoiding being a literal translation.”</li><li><strong>Super:</strong> “ensuring that the translation conveys the intended meaning accurately and avoiding being a literal translation.”</li></ul></div><div class="table-scroll"><table><caption>LTE rate (%) · Qwen3.5-9B · Figure 3</caption><thead><tr><th scope="col">Direction</th><th scope="col">n</th><th scope="col">Basic</th><th scope="col">Meaning-First</th><th scope="col">Anti-Literal</th><th scope="col">Super</th></tr></thead><tbody><tr><th scope="row">En → Fa</th><td>200</td><td>9.0</td><td>8.0</td><td>3.5</td><td>4.5</td></tr><tr><th scope="row">Fr → En</th><td>138</td><td>22.5</td><td>18.8</td><td>13.0</td><td>13.8</td></tr><tr><th scope="row">Ko → En</th><td>422</td><td>4.5</td><td>3.8</td><td>3.6</td><td>3.3</td></tr><tr><th scope="row">Fa → En</th><td>200</td><td>20.0</td><td>16.0</td><td>14.5</td><td>17.0</td></tr><tr><th scope="row">Fi → En</th><td>85</td><td>32.9</td><td>32.9</td><td>29.4</td><td>30.6</td></tr><tr><th scope="row">Ja → En</th><td>1188</td><td>14.4</td><td>14.9</td><td>11.4</td><td>12.3</td></tr></tbody></table></div></details></div>
+      </div>
+      <p class="model-scope">Evaluated models: Qwen3-4B · Qwen3-8B · Qwen3.5-4B · Qwen3.5-9B · Llama-3.3-70B-Instruct.<br>Figures above show Qwen3.5-9B; see Appendix K for the other four models.</p>
+    </section>
+
+    <section class="mechanism-section" id="controls" aria-labelledby="controls-title"><div class="container">
+      <div class="section-heading"><span class="section-index">04 / LOOKING INSIDE THE MODEL</span><h2 id="controls-title">A strong probe.<br>A necessary reality check.</h2><p>Can hidden states reveal a direction that causes literal translation bias?</p></div>
+      <div class="controls-grid"><div class="controls-story"><p>At first, linear probes distinguish “know-but-error” from “know-and-correct” cases with high accuracy. But the same idiom can appear in both training and validation data.</p><p>Separating idioms across folds sharply reduces performance. After removing idiom identity, the probe never exceeds a within-idiom permutation baseline in the five computable language pairs.</p><div class="mechanism-takeaway"><span aria-hidden="true">↳</span><p><strong>The apparent signal largely reflects idiom identity.</strong><br>Erasing the recovered direction also performs comparably overall to erasing a matched random direction.</p></div></div>
+      <div class="control-results"><div class="control-results-heading"><span>PROBING CONTROL</span><span>BALANCED ACCURACY</span></div><div class="control-result"><div><strong>Random K-Fold</strong><p>Idiom overlap allowed</p></div><span class="control-value">79–87<span>%</span></span></div><div class="control-result"><div><strong>Group K-Fold</strong><p>Training and validation idioms separated</p></div><span class="control-value">57–72<span>%</span></span></div><div class="control-result highlighted"><div><strong>Within-idiom + permutation</strong><p>Idiom identity removed</p></div><span class="control-value chance">≈ chance</span></div><p class="control-footnote">Table 4 · Qwen3.5-9B. The identity-removed probe never exceeds the null in the five pairs where the control can be computed.</p></div></div>
+      <div class="control-caution"><strong>What the evidence supports</strong><p>These experiments do not establish a bias-specific causal direction. Smaller samples for Finnish→English and Korean→English warrant additional caution; detailed paired ablations and robustness checks are in the paper.</p><a href="assets/IdiomDIT.pdf#page=7" target="_blank" rel="noopener">Read the probing &amp; ablation analysis <span aria-hidden="true">↗</span></a></div>
+      <details class="paper-figure-details dark-details"><summary>View the probing and ablation pipeline <span aria-hidden="true">+</span></summary><figure><button class="figure-zoom" data-figure="assets/probing.png" data-caption="Figure 4. Linear probing and directional ablation pipeline." aria-label="Enlarge Figure 4: probing and ablation pipeline"><img src="assets/probing.png" width="1374" height="306" loading="lazy" alt="The paper’s three-stage pipeline: construct contrastive groups and extract hidden states, fit layer-wise linear probes, then ablate the recovered directions during generation."></button><figcaption>Figure 4. The procedure whose evidence is tested by the identity and random-direction controls.</figcaption></figure></details>
+    </div></section>
+
+    <section class="section container resources" aria-labelledby="resources-title"><div class="section-heading"><span class="section-index">05 / TAKE A CLOSER LOOK</span><h2 id="resources-title">Read. Reproduce. Build on it.</h2></div><div class="resource-links"><a class="resource-link" href="assets/IdiomDIT.pdf" target="_blank" rel="noopener"><span class="resource-icon" aria-hidden="true">↗</span><div><span class="section-kicker">THE PAPER</span><h3>The complete study</h3><p>Methods, results, controls, and appendices.</p></div><span class="resource-type">PDF · 24 pages</span></a><a class="resource-link" href="https://github.com/NLP2CT/IdiomDIT" target="_blank" rel="noopener"><span class="resource-icon" aria-hidden="true">⌘</span><div><span class="section-kicker">THE CODE</span><h3>IdiomDIT on GitHub</h3><p>Evaluation, analysis, and control protocols.</p></div><span class="resource-type">NLP2CT / IdiomDIT</span></a></div></section>
+
+    <section class="citation-section container" id="citation" aria-labelledby="citation-title"><div class="citation-intro"><span class="section-index">CITATION</span><h2 id="citation-title">Cite this work.</h2><p>If IdiomDIT helps your research,<br>please consider citing our paper.</p><p class="citation-status">Manuscript citation.</p><a class="inline-link" href="assets/idiomdit.bib" download>Download .bib <span aria-hidden="true">↓</span></a></div><div class="citation-box"><div class="citation-toolbar"><span>BibTeX</span><button id="copy-citation" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h12v12H9zM15 5V3H3v12h2"/></svg><span>Copy citation</span></button></div><pre><code id="bibtex">@misc{sun2026idioms,
+  title  = {Idioms Understood, Yet Translated Literally:
+            Diagnosing Literal Translation Bias in Multilingual LLMs},
+  author = {Sun, Yanming and Zhan, Runzhe and Chao, Yu and
+            Ma, Jingkun and Wang, Shuo and Chao, Lidia S. and
+            Wong, Derek F.},
+  year   = {2026},
+  note   = {Manuscript}
+}</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p></div></section>
+  </main>
+
+  <footer class="site-footer container"><a class="brand" href="#top">Idiom<span>DIT</span></a><p>Understanding language. Examining what gets lost in translation.</p><a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+  <dialog id="figure-dialog" aria-labelledby="figure-dialog-caption"><button id="close-figure" type="button" aria-label="Close enlarged figure">×</button><img id="dialog-image" alt=""><p id="figure-dialog-caption"></p></dialog>
+</body>
+</html>

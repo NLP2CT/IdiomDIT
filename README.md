@@ -1,5 +1,7 @@
 # IdiomDIT
 
+[Project page](https://nlp2ct.github.io/IdiomDIT/)
+
 Original implementation for **"Idioms Understood, Yet Translated Literally: Diagnosing Literal Translation Bias in Multilingual LLMs"**.
 
 ## 📖 Introduction
